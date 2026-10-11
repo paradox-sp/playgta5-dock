@@ -1,0 +1,23 @@
+name: Build and Package Artifacts
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-and-package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Docker Image
+        run: docker build -t playgta5:latest .
+
+      - name: Save Docker Image
+        run: docker save playgta5:latest | gzip > playgta5-docker-image.tar.gz
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: playgta5-image
+          path: playgta5-docker-image.tar.gz
+          retention-days: 7

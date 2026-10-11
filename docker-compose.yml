@@ -1,0 +1,10 @@
+services:
+  playgta5:
+    build: .
+    container_name: playgta5_web
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount your host's extracted .mirror folder into the expected path in the container
+      - /path/to/your/.mirror:/app/mirror/playgta5.com:ro
+    restart: unless-stopped

@@ -108,8 +108,9 @@ if __name__ == '__main__':
     args = argparse.ArgumentParser()
     args.add_argument('--port', type=int, default=8000)
     args.add_argument('--open', action='store_true', help='open the default browser after binding')
+    args.add_argument('--host', type=str, default='127.0.0.1')
     options = args.parse_args()
-    server = ThreadingHTTPServer(('127.0.0.1', options.port), Handler)
+    server = ThreadingHTTPServer((options.host, options.port), Handler)
     address = 'http://localhost:%d/' % server.server_port
     print('Local mirror: %s (Ctrl+C to stop)' % address, flush=True)
     if options.open:
